@@ -3,12 +3,15 @@ import re
 
 def getVersion():
     try:
-        fp = open('src/index.php','r')
-        lines = fp.readlines()
-        for line in lines:
-            if "DEFINE('API_VERSION'" in line:
-                version = line.split(',')[1].replace('\'','').replace(')','').replace(';','').replace('\n','').split('.')
-                break
+        with  open(patch+'/trackerup-api/index.php','rb') as fp:
+        #lines = fp.readlines()
+            for line in fp:
+                line=str(line).replace("\\r\\n","")
+                if line.find("DEFINE('API_VERSION'") > 0:
+                    version = line.split(',')[1].replace('\'','').replace(')','').replace(';','').replace('\n','').split('.')
+                    break
+    except:
+        print('fnf_error')            
     finally:
         fp.close()
         return parseVersionToInt(version)
@@ -56,7 +59,7 @@ def compareVersion(versions):
     return lastVersion
 
 def parseVersionToInt(version):
-    return [int(value) for value in version]
+    return [int(value.replace('"', '')) for value in version]
 
 def push(version, branch):
     versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
@@ -69,6 +72,9 @@ def push(version, branch):
     subprocess.run(push)
 
 def main():
+    global patch 
+    patch = input('Insert tracker patch: ')
+
     task = getBranch()
     versionTask = getVersion()
 
