@@ -4,7 +4,7 @@ import sys
 
 def getVersion():
     try:
-        fp = open(path+'/index.php','r')
+        fp = open(path+'index.php','r')
         lines = fp.readlines()
         for line in lines:
             if "DEFINE('API_VERSION'" in line:
@@ -20,14 +20,14 @@ def setVersion(version, oldVersion):
     try:
         versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
         oldVersionStr = str(oldVersion[0])+'.'+str(oldVersion[1])+'.'+str(oldVersion[2])
-        fp = open(path+'/index.php','r')
+        fp = open(path+'index.php','r')
         fileStr = fp.read()
     finally:
         fp.close()
         file_string = (re.sub(r'\sDEFINE\(\'API_VERSION\',\''+oldVersionStr, '\nDEFINE(\'API_VERSION\',\''+versionStr, fileStr))
     
     try:
-        fp = open(path+'/index.php','w')
+        fp = open(path+'index.php','w')
         fp.write(file_string)
     finally:
         fp.close()
@@ -64,7 +64,7 @@ def parseVersionToInt(version):
 def push(version, branch):
     versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
     pr = branch.split('/')[1]
-    add = 'git add '+path+'/index.php'
+    add = 'git add '+path+'index.php'
     commit = 'git commit -m"#'+pr+' change project version '+versionStr+'"'
     push = 'git push'
     subprocess.run(add)
