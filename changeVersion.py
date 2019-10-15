@@ -50,7 +50,7 @@ def compareVersion(versions):
         lastVersion = versions[1]
     else:
         #copare third position of version number
-        if (versions[1][2] > lastVersion[2]):
+        if (versions[1][2] >= lastVersion[2]):
             lastVersion = versions[1]
 
     return lastVersion

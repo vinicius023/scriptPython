@@ -1,3 +1,3 @@
 <?php
-DEFINE('API_VERSION','1.54.5');
+DEFINE('API_VERSION','1.54.6');
 
