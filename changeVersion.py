@@ -29,7 +29,7 @@ def setVersion(version, oldVersion):
         file_string = (re.sub(r'\sDEFINE\(\'API_VERSION\',\''+oldVersionStr, '\nDEFINE(\'API_VERSION\',\''+versionStr, fileStr))
     
     try:
-        fp = open(path+'index.php','w')
+        fp = open(path+'index.php','w', encoding="utf-8")
         fp.write(file_string)
     finally:
         fp.close()
