@@ -4,14 +4,15 @@ import sys
 
 def getVersion():
     try:
-        fp = open(path+'index.php','r')
+        fp = open(path+'index.php','rb')
         lines = fp.readlines()
         for line in lines:
-            if "DEFINE('API_VERSION'" in line:
-                version = line.split(',')[1].replace('\'','').replace(')','').replace(';','').replace('\n','').split('.')
+            decodeLine = line.decode('utf-8')
+            if "DEFINE('API_VERSION'" in decodeLine:
+                version = decodeLine.split(',')[1].replace('\'','').replace(')','').replace(';','').replace('\n','').split('.')
                 break
     except:
-        print('fnf_error')            
+        print('Error on read file')
     finally:
         fp.close()
         return parseVersionToInt(version)
@@ -20,8 +21,9 @@ def setVersion(version, oldVersion):
     try:
         versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
         oldVersionStr = str(oldVersion[0])+'.'+str(oldVersion[1])+'.'+str(oldVersion[2])
-        fp = open(path+'index.php','r')
+        fp = open(path+'index.php','rb')
         fileStr = fp.read()
+        fileStr = fileStr.decode('utf-8')
     finally:
         fp.close()
         file_string = (re.sub(r'\sDEFINE\(\'API_VERSION\',\''+oldVersionStr, '\nDEFINE(\'API_VERSION\',\''+versionStr, fileStr))
