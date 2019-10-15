@@ -1,5 +1,5 @@
 <?php
-DEFINE('API_VERSION','1.53.8');
+DEFINE('API_VERSION','1.54.0');
 
 /**
  * criando uma branch task para comparar as versões
