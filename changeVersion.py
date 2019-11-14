@@ -22,12 +22,17 @@ def setVersion(version, oldVersion):
         versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
         oldVersionStr = str(oldVersion[0])+'.'+str(oldVersion[1])+'.'+str(oldVersion[2])
         fp = open(path+'index.php','rb')
-        fileStr = fp.read().split('\r\n')
+        fileStr = fp.read()
         fileStr = fileStr.decode('utf-8')
+        fileStr = fileStr.split('\r\n')
     finally:
         fp.close()
-        file_string = (re.sub(r'\sDEFINE\(\'API_VERSION\',\''+oldVersionStr, '\nDEFINE(\'API_VERSION\',\''+versionStr, fileStr))
-    
+        # file_string = (re.sub(r'\sDEFINE\(\'API_VERSION\',\''+oldVersionStr, '\nDEFINE(\'API_VERSION\',\''+versionStr, fileStr))
+        file_string = ''
+        indexVersion = fileStr.index('DEFINE(\'API_VERSION\',\''+oldVersionStr+'\');')
+        fileStr[indexVersion] = 'DEFINE(\'API_VERSION\',\''+versionStr+'\');'
+        separator = '\n'
+        file_string = separator.join(fileStr)    
     try:
         fp = open(path+'index.php','w', encoding="utf-8")
         fp.write(file_string)

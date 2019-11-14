@@ -1,6 +1,6 @@
 <?php
 
-DEFINE('API_VERSION','1.54.8');
+DEFINE('API_VERSION','1.54.10');
 
 define('ABSPATH',__DIR__);
 define('PRIV_KEY' , "AFyQYuDzh7yAvte6yKVBNwjKZkPyX8z9p8sJz3UNsjJFNNEm2q86KhXKPWs7kunYUxGqXfbjCq8vcvFr9QNS5PhtVfHQYfx8tPbXXNszZnGe6mTUuHzZFqBJ9VR9kmN9");
