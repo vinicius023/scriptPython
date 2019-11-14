@@ -22,7 +22,7 @@ def setVersion(version, oldVersion):
         versionStr = str(version[0])+'.'+str(version[1])+'.'+str(version[2])
         oldVersionStr = str(oldVersion[0])+'.'+str(oldVersion[1])+'.'+str(oldVersion[2])
         fp = open(path+'index.php','rb')
-        fileStr = fp.read()
+        fileStr = fp.read().split('\r\n')
         fileStr = fileStr.decode('utf-8')
     finally:
         fp.close()
